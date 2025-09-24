@@ -1,0 +1,53 @@
+def celsius_to_fahrenheit(c):
+    return (c * 9/5) + 32
+
+def celsius_to_kelvin(c):
+    return c + 273.15
+
+def fahrenheit_to_celsius(f):
+    return (f - 32) * 5/9
+
+def fahrenheit_to_kelvin(f):
+    return (f - 32) * 5/9 + 273.15
+
+def kelvin_to_celsius(k):
+    return k - 273.15
+
+def kelvin_to_fahrenheit(k):
+    return (k - 273.15) * 9/5 + 32
+
+def convert_temperature(value, from_scale, to_scale):
+    if from_scale == to_scale:
+        return value
+    # Celsius conversions
+    if from_scale == "C":
+        if to_scale == "F":
+            return celsius_to_fahrenheit(value)
+        elif to_scale == "K":
+            return celsius_to_kelvin(value)
+    # Fahrenheit conversions
+    if from_scale == "F":
+        if to_scale == "C":
+            return fahrenheit_to_celsius(value)
+        elif to_scale == "K":
+            return fahrenheit_to_kelvin(value)
+    # Kelvin conversions
+    if from_scale == "K":
+        if to_scale == "C":
+            return kelvin_to_celsius(value)
+        elif to_scale == "F":
+            return kelvin_to_fahrenheit(value)
+    raise ValueError("Invalid temperature scale.")
+
+if __name__ == "__main__":
+    print("Temperature Conversion Program")
+    print("Choose scales: C (Celsius), F (Fahrenheit), K (Kelvin)")
+    from_scale = input("Convert from (C/F/K): ").strip().upper()
+    to_scale = input("Convert to (C/F/K): ").strip().upper()
+    value = float(input(f"Enter the value in {from_scale}: "))
+
+    try:
+        result = convert_temperature(value, from_scale, to_scale)
+        print(f"{value} {from_scale} = {result:.2f} {to_scale}")
+    except ValueError as e:
+        print("Error:", e)
